@@ -1,0 +1,487 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaMart | Premium Shopping</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080808;
+    color: #f5f5f5;
+}
+
+header {
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #292929;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo span,
+.hero h1 span,
+.section-title span,
+footer span {
+    color: #d4af65;
+}
+
+.cart-button {
+    background: #d4af65;
+    color: #080808;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hero {
+    text-align: center;
+    padding: 75px 20px;
+    background: radial-gradient(ellipse at top, #29251b, #080808 70%);
+}
+
+.hero p {
+    color: #d4af65;
+    letter-spacing: 4px;
+    font-size: 12px;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(34px, 6vw, 60px);
+    margin-bottom: 18px;
+}
+
+.hero .subtitle {
+    color: #aaa;
+    letter-spacing: normal;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.search-area {
+    text-align: center;
+    padding: 25px 20px;
+}
+
+.search-area input {
+    width: min(100%, 450px);
+    padding: 14px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background: #151515;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+.search-area input:focus {
+    border-color: #d4af65;
+}
+
+.products {
+    max-width: 1150px;
+    margin: 20px auto 60px;
+    padding: 0 22px;
+}
+
+.section-title {
+    font-size: 27px;
+    margin-bottom: 28px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: #121212;
+    border: 1px solid #282828;
+    border-radius: 12px;
+    padding: 15px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #d4af65;
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #222;
+}
+
+.card h3 {
+    margin: 17px 0 10px;
+}
+
+.description {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.price {
+    color: #d4af65;
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.add-button {
+    width: 100%;
+    background: transparent;
+    color: #d4af65;
+    border: 1px solid #d4af65;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background: #d4af65;
+    color: #080808;
+}
+
+.cart-section {
+    max-width: 750px;
+    margin: 0 auto 60px;
+    padding: 25px;
+    background: #121212;
+    border: 1px solid #282828;
+    border-radius: 12px;
+}
+
+.cart-section h2 {
+    margin-bottom: 20px;
+}
+
+#cart-items {
+    list-style: none;
+}
+
+#cart-items li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid #292929;
+}
+
+.remove-button {
+    background: transparent;
+    color: #ff7777;
+    border: 1px solid #633;
+    border-radius: 5px;
+    padding: 5px 9px;
+    cursor: pointer;
+}
+
+.cart-total {
+    font-size: 22px;
+    color: #d4af65;
+    margin: 22px 0;
+}
+
+.checkout-button {
+    width: 100%;
+    background: #20c76a;
+    color: #080808;
+    padding: 14px;
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.checkout-button:hover {
+    background: #36e681;
+}
+
+#message {
+    color: #d4af65;
+    margin-top: 15px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #888;
+    border-top: 1px solid #292929;
+}
+
+@media (max-width: 500px) {
+    header {
+        padding: 18px;
+    }
+
+    .hero {
+        padding: 55px 18px;
+    }
+
+    .card img {
+        height: 190px;
+    }
+
+    .cart-section {
+        margin-left: 12px;
+        margin-right: 12px;
+        padding: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">NOVA<span>MART</span></div>
+
+    <button class="cart-button"
+        onclick="document.getElementById('cart').scrollIntoView({behavior:'smooth'})">
+        🛒 Cart (<span id="cart-count">0</span>)
+    </button>
+</header>
+
+<section class="hero">
+    <p>THE PREMIUM COLLECTION</p>
+    <h1>Shop Better.<br><span>Live Better.</span></h1>
+    <p class="subtitle">Discover products selected for your lifestyle.</p>
+</section>
+
+<div class="search-area">
+    <input
+        id="search"
+        type="search"
+        placeholder="Search products..."
+        aria-label="Search products"
+        oninput="searchProducts()">
+</div>
+
+<main class="products">
+    <h2 class="section-title">Featured <span>Products</span></h2>
+
+    <div class="product-grid">
+
+        <article class="card" data-name="classic watch">
+            <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500"
+                alt="Classic wristwatch">
+
+            <h3>Classic Watch</h3>
+            <p class="description">Simple design. Timeless style.</p>
+            <p class="price">৳1,200</p>
+
+            <button class="add-button"
+                onclick="addToCart('Classic Watch', 1200)">
+                Add to Cart +
+            </button>
+        </article>
+
+        <article class="card" data-name="sport sneakers">
+            <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"
+                alt="Sport sneakers">
+
+            <h3>Sport Sneakers</h3>
+            <p class="description">Comfort for every adventure.</p>
+            <p class="price">৳2,500</p>
+
+            <button class="add-button"
+                onclick="addToCart('Sport Sneakers', 2500)">
+                Add to Cart +
+            </button>
+        </article>
+
+        <article class="card" data-name="wireless headphones">
+            <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"
+                alt="Wireless headphones">
+
+            <h3>Wireless Headphones</h3>
+            <p class="description">Enjoy your favorite sounds.</p>
+            <p class="price">৳1,800</p>
+
+            <button class="add-button"
+                onclick="addToCart('Wireless Headphones', 1800)">
+                Add to Cart +
+            </button>
+        </article>
+
+    </div>
+
+    <p id="no-results"
+       style="display:none;text-align:center;padding:30px;color:#aaa;">
+        No products found.
+    </p>
+</main>
+
+<section class="cart-section" id="cart">
+    <h2>🛒 Your Shopping Cart</h2>
+
+    <ul id="cart-items">
+        <li>Your cart is empty.</li>
+    </ul>
+
+    <p class="cart-total">
+        Total: ৳<span id="cart-total">0</span>
+    </p>
+
+    <button class="checkout-button" onclick="checkout()">
+        Order via WhatsApp
+    </button>
+
+    <p id="message" aria-live="polite"></p>
+</section>
+
+<footer>
+    <p>© 2026 <span>NovaMart</span> | Premium Shopping Demo</p>
+</footer>
+
+<script>
+const cart = [];
+
+// Replace this with the shop owner's WhatsApp number.
+// Example: Bangladesh number 01712345678 becomes 8801712345678.
+const WHATSAPP_NUMBER = "8801XXXXXXXXX";
+
+function addToCart(name, price) {
+    cart.push({ name, price });
+    updateCart();
+
+    document.getElementById("message").textContent =
+        name + " added to your cart!";
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+
+    document.getElementById("message").textContent =
+        "Product removed from your cart.";
+}
+
+function updateCart() {
+    const items = document.getElementById("cart-items");
+    items.innerHTML = "";
+
+    let total = 0;
+
+    if (cart.length === 0) {
+        const empty = document.createElement("li");
+        empty.textContent = "Your cart is empty.";
+        items.appendChild(empty);
+    }
+
+    cart.forEach(function(product, index) {
+        total += product.price;
+
+        const li = document.createElement("li");
+
+        const name = document.createElement("span");
+        name.textContent = product.name + " - ৳" + product.price;
+
+        const remove = document.createElement("button");
+        remove.textContent = "Remove";
+        remove.className = "remove-button";
+
+        remove.onclick = function() {
+            removeFromCart(index);
+        };
+
+        li.appendChild(name);
+        li.appendChild(remove);
+        items.appendChild(li);
+    });
+
+    document.getElementById("cart-count").textContent = cart.length;
+    document.getElementById("cart-total").textContent = total;
+}
+
+function searchProducts() {
+    const query = document.getElementById("search").value
+        .trim()
+        .toLowerCase();
+
+    const cards = document.querySelectorAll(".card");
+    let visible = 0;
+
+    cards.forEach(function(card) {
+        const matches = card.dataset.name.includes(query);
+        card.style.display = matches ? "" : "none";
+
+        if (matches) {
+            visible++;
+        }
+    });
+
+    document.getElementById("no-results").style.display =
+        visible === 0 ? "block" : "none";
+}
+
+function checkout() {
+    const message = document.getElementById("message");
+
+    if (cart.length === 0) {
+        message.textContent = "Please add a product to your cart first.";
+        return;
+    }
+
+    if (!/^8801[3-9]\d{8}$/.test(WHATSAPP_NUMBER)) {
+        message.textContent =
+            "WhatsApp setup is incomplete. Replace WHATSAPP_NUMBER in the code with the shop owner's Bangladesh WhatsApp number.";
+        return;
+    }
+
+    const total = cart.reduce(function(sum, product) {
+        return sum + product.price;
+    }, 0);
+
+    let orderText = "Hello! I would like to place an order from NovaMart.\n\n";
+    orderText += "My order:\n";
+
+    cart.forEach(function(product) {
+        orderText += product.name + " - Tk " + product.price + "\n";
+    });
+
+    orderText += "\nTotal: Tk " + total;
+    orderText += "\n\nPlease confirm product availability and delivery details.";
+
+    const whatsappURL =
+        "https://wa.me/" + WHATSAPP_NUMBER +
+        "?text=" + encodeURIComponent(orderText);
+
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
+}
+</script>
+
+</body>
+</html>
+```
